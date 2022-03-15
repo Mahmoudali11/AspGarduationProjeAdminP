@@ -12,10 +12,13 @@ namespace WebApplication7.Controllers
 {
     public class DepartmentController : Controller
     {
+        private readonly DepartmentRep department;
 
-
-        private DepartmentRep department = new DepartmentRep();
-
+        public DepartmentController(DepartmentRep department)
+        {
+            Console.WriteLine("ds");
+           this.department = department;
+        }
         public IActionResult Index()
         {
 
