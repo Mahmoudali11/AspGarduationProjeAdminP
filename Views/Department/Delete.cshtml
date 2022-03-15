@@ -1,0 +1,38 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model WebApplication7.Models.DepartmentVM
+@{
+    ViewBag.Title = "Delete An Department";
+}
+
+
+
+@{
+    ViewBag.Title = "Create department"; }
+
+@if (Model != null)
+{
+    <h1>@Model.DepartmentName</h1>}
+<form method="post" asp-action="Delete" asp-controller="Department" class="form-group">
+    <label>Name</label>
+    <input asp-for="DepartmentName" class="form-control"  disabled/><br />
+   // <span asp-validation-for="DepartmentName" class="text-danger"></span>
+    <br />
+    <label>Code</label>
+
+    <input asp-for="DepartmentCode" class="form-control" disabled/>
+ //   <span asp-validation-for="DepartmentCode" class="text-danger"></span>
+
+    <br />
+
+    <input type="submit" class="btn btn-primary" />
+
+
+
+
+
+</form>
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
