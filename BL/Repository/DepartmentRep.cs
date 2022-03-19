@@ -6,38 +6,52 @@ using WebApplication7.BL.Interface;
 using WebApplication7.DAL.Database;
 using WebApplication7.DAL.Entities;
 using WebApplication7.Models;
+using AutoMapper;
 
 namespace WebApplication7.BL.Repository
 {
     public class DepartmentRep : IDepartmentRep
     {
         private readonly DbContainer db;
+        private readonly IMapper mapper;
 
         //  private DbContainer db = new DbContainer();
-        public DepartmentRep(DbContainer db)
+        public DepartmentRep(DbContainer db,IMapper mapper)
         {
             this.db = db;
+            this.mapper = mapper;
         }
         public IQueryable<DepartmentVM> Get()
         {
-            var data = db.Department.Select(a => new DepartmentVM { Id = a.Id, DepartmentName = a.DepartmentName, DepartmentCode = a.DepartmentCode });
-            return data;
+            IQueryable<DepartmentVM> data = GetAllDepartment(); return data;
+        }
+
+        private IQueryable<DepartmentVM> GetAllDepartment()
+        {
+            return db.Department.Select(a => new DepartmentVM { Id = a.Id, DepartmentName = a.DepartmentName, DepartmentCode = a.DepartmentCode });
         }
 
         public DepartmentVM GetById(int id)
         {
-            var data = db.Department.Where(a => a.Id == id)
+            DepartmentVM data = GetDepartment(id);
+            return data;
+        }
+
+        private DepartmentVM GetDepartment(int id)
+        {
+            return db.Department.Where(a => a.Id == id)
                                     .Select(a => new DepartmentVM { Id = a.Id, DepartmentName = a.DepartmentName, DepartmentCode = a.DepartmentCode })
                                     .FirstOrDefault();
-            return data;
         }
 
         public void Add(DepartmentVM dpt)
         {
-            // Mapping
-            Department d = new Department();
-            d.DepartmentName = dpt.DepartmentName;
-            d.DepartmentCode = dpt.DepartmentCode;
+            //manual Mapping
+            //Department d = new Department();
+            //d.DepartmentName = dpt.DepartmentName;
+            //d.DepartmentCode = dpt.DepartmentCode;
+
+            var d=mapper.Map<Department>(dpt);
 
             db.Department.Add(d);
             db.SaveChanges();
@@ -47,8 +61,10 @@ namespace WebApplication7.BL.Repository
         {
             var OldData = db.Department.Find(dpt.Id);
 
-            OldData.DepartmentName = dpt.DepartmentName;
-            OldData.DepartmentCode = dpt.DepartmentCode;
+            //OldData.DepartmentName = dpt.DepartmentName;
+            //OldData.DepartmentCode = dpt.DepartmentCode;
+
+            OldData=mapper.Map<Department>(dpt);
 
             db.SaveChanges();
 

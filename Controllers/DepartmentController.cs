@@ -26,6 +26,8 @@ namespace WebApplication7.Controllers
         //    // this.department = department;
         //}
         //this apply loosly coupled approach
+        //Note interface better for Device resource because it  load its protocol methods
+        //and others methods loaded in memory on request it.
         private readonly IDepartmentRep department  ;
         public DepartmentController(IDepartmentRep department)
         {
