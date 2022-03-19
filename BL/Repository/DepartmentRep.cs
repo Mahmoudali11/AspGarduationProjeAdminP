@@ -11,9 +11,13 @@ namespace WebApplication7.BL.Repository
 {
     public class DepartmentRep : IDepartmentRep
     {
+        private readonly DbContainer db;
 
-        private DbContainer db = new DbContainer();
-
+        //  private DbContainer db = new DbContainer();
+        public DepartmentRep(DbContainer db)
+        {
+            this.db = db;
+        }
         public IQueryable<DepartmentVM> Get()
         {
             var data = db.Department.Select(a => new DepartmentVM { Id = a.Id, DepartmentName = a.DepartmentName, DepartmentCode = a.DepartmentCode });

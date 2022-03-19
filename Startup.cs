@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using WebApplication7.BL.Interface;
 using WebApplication7.BL.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication7.DAL.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication7
 {
@@ -17,14 +20,23 @@ namespace WebApplication7
         {
             Configuration = configuration;
         }
-
+        //this refers to appsettings json file 
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddScoped<DepartmentRep>();
+            //here apply singletone"or unit of work" using DI
+            //create instance for each user... and this is most used
+            services.AddScoped<IDepartmentRep,DepartmentRep>();
+            //shared instance for all users
+            //  services.AddSingleton<DepartmentRep>();
+            //instanced for each request
+            //services.AddTransient<DepartmentRep>();
+            services.AddDbContextPool<DbContainer>(optio=>optio.UseSqlServer(Configuration.GetConnectionString("SiteDb")));
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -6,7 +6,7 @@ using WebApplication7.Models;
 
 namespace WebApplication7.BL.Interface
 {
-    interface IDepartmentRep
+   public interface IDepartmentRep
     {
         IQueryable<DepartmentVM> Get();
         DepartmentVM GetById(int id);

@@ -7,21 +7,38 @@ using WebApplication7.BL.Repository;
 using WebApplication7.DAL.Database;
 using WebApplication7.Models;
  using System.Diagnostics;
+using WebApplication7.BL.Interface;
 
 namespace WebApplication7.Controllers
 {
     public class DepartmentController : Controller
     {
-        private readonly DepartmentRep department;
 
-        public DepartmentController(DepartmentRep department)
+        //in this way is tightly coupled so this is not best practice better use loosly coupled
+        //using Intertface to support multible Implemntaion and reduce coupling ;
+        // private readonly DepartmentRep department;
+       
+        //private readonly DepartmentRep department;
+        //public DepartmentController(DepartmentRep department)
+        //{
+        //    Console.WriteLine("ds");
+        //    this.department = department;
+        //    // this.department = department;
+        //}
+        //this apply loosly coupled approach
+        private readonly IDepartmentRep department  ;
+        public DepartmentController(IDepartmentRep department)
         {
-            Console.WriteLine("ds");
-           this.department = department;
+
+            ViewBag.d = 32;
+            ViewData["t"] = "dsad";
+            Console.WriteLine($"ds{5+6}");
+            this.department = department;
+            // this.department = department;
         }
         public IActionResult Index()
         {
-
+              
             //// View Data ==> Object
             //ViewData["x"] = "Hi I'm View Data";
 
