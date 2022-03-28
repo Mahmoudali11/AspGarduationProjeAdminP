@@ -3,6 +3,8 @@ using WebApplication7.BL.Repository;
 using WebApplication7.BL.Interface;
 using WebApplication7.Models;
 using System;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AspGraduateProjAdminPan.Controllers
 {
@@ -10,10 +12,12 @@ namespace AspGraduateProjAdminPan.Controllers
         
     {
         private readonly IEmployeeRep employee;
+        private readonly IDepartmentRep department;
 
-        public EmployeeController(IEmployeeRep employee)
+        public EmployeeController(IEmployeeRep employee,IDepartmentRep department)
         {
             this.employee = employee;
+            this.department = department;
         }
         public IActionResult Index()
         {
@@ -26,6 +30,13 @@ namespace AspGraduateProjAdminPan.Controllers
         [HttpGet]
         public IActionResult Create()
         {
+
+
+  var data=department.Get();
+
+
+
+            ViewBag.Deps = new SelectList(data,"Id");
  
                 return View();
 
@@ -40,6 +51,11 @@ namespace AspGraduateProjAdminPan.Controllers
         public IActionResult Create(EmployeeVM emp)
         {
 
+            var data = department.Get();
+
+
+
+            ViewBag.Deps = new SelectList(data, "Id","DepartmentName");
             try
             {
                 if (ModelState.IsValid)

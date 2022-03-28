@@ -1,4 +1,8 @@
 ﻿@model WebApplication7.Models.EmployeeVM
+@{ 
+
+    ViewBag.Title = "create";
+}
 
 <form asp-action="Create" method="post" asp-controller="Employee" class="form-group">
 
@@ -13,10 +17,10 @@
     <span class="text-danger" asp-validation-for="Name"></span>
 
 
-    <label>IsActive Of Employee</label>
-    <input type="checkbox" class="form-control" asp-for="IsActive" />
-    <span class="text-danger" asp-validation-for="IsActive"></span>
-
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" asp-for="IsActive" class="custom-control-input">
+        <label class="custom-control-label" asp-for="IsActive"> Is Active</label>
+    </div>
 
     <label>Hire date Of Employee</label>
     <input type="date" class="form-control" asp-for="HireDate" />
@@ -27,19 +31,21 @@
     <input type="email" class="form-control" asp-for="Email" />
     <span class="text-danger" asp-validation-for="Email"></span>
 
+    <br />
+    <br />
+    <label asp-for="DepId">Department</label>
 
+    <select asp-for="DepId"   asp-items="@(SelectList)ViewBag.Deps">
+        <option>Choose Department..</option>
+    </select>
 
-    <label>DepId Of Employee</label>
-    <input type="text" class="form-control" asp-for="DepId" />
-    <span class="text-danger" asp-validation-for="DepId"></span>
-
-
+    <br/>
     <label>Salary Of Employee</label>
     <input type="number" class="form-control" asp-for="Salary" />
     <span class="text-danger" asp-validation-for="Salary"></span>
 
 
-    <input type="submit" class="btn btn-primary" />
+    <input type="submit" class="btn btn-primary"/>
 
 
 
