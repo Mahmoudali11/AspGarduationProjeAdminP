@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +10,7 @@ namespace WebApplication7.DAL.Database
     public class DbContainer : DbContext
     {
         public DbSet<Department> Department { get; set; }
+        public DbSet<Employee> Employee { get; set; }
         //this override onConfiguring method..
         public DbContainer(DbContextOptions options):base(options)
         {

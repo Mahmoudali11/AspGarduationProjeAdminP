@@ -33,6 +33,8 @@ namespace WebApplication7
             //create instance for each user... and this is most used
             //=>regester my services
             services.AddScoped<IDepartmentRep,DepartmentRep>();
+            services.AddScoped<IEmployeeRep, EmployeeRep>();
+
             //shared instance for all users
             //  services.AddSingleton<DepartmentRep>();
             /////////////////////////////
@@ -40,10 +42,13 @@ namespace WebApplication7
             //services.AddTransient<DepartmentRep>();
             //////////////////////////////////
             ///
-            /// 
+            void regm(AutoMapper.IMapperConfigurationExpression n)
+            {
+                n.AddProfile(new Mapper());
+            }
             /// 
             /// register Mapper 
-               services.AddAutoMapper(x=>x.AddProfile(new Mapper()));
+               services.AddAutoMapper(regm);
             //////register connection string..
             
             services.AddDbContextPool<DbContainer>(optio=>optio.UseSqlServer(Configuration.GetConnectionString("SiteDb")));

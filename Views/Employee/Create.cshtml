@@ -1,0 +1,47 @@
+﻿@model WebApplication7.Models.EmployeeVM
+
+<form asp-action="Create" method="post" asp-controller="Employee" class="form-group">
+
+
+    <label>Name Of Employee</label>
+    <input type="text" class="form-control" asp-for="Name" />
+    <span class="text-danger" asp-validation-for="Name"></span>
+
+
+    <label>Adreess Of Employee</label>
+    <input type="text" class="form-control" asp-for="Address" />
+    <span class="text-danger" asp-validation-for="Name"></span>
+
+
+    <label>IsActive Of Employee</label>
+    <input type="checkbox" class="form-control" asp-for="IsActive" />
+    <span class="text-danger" asp-validation-for="IsActive"></span>
+
+
+    <label>Hire date Of Employee</label>
+    <input type="date" class="form-control" asp-for="HireDate" />
+    <span class="text-danger" asp-validation-for="Name"></span>
+
+
+    <label>Email Of Employee</label>
+    <input type="email" class="form-control" asp-for="Email" />
+    <span class="text-danger" asp-validation-for="Email"></span>
+
+
+
+    <label>DepId Of Employee</label>
+    <input type="text" class="form-control" asp-for="DepId" />
+    <span class="text-danger" asp-validation-for="DepId"></span>
+
+
+    <label>Salary Of Employee</label>
+    <input type="number" class="form-control" asp-for="Salary" />
+    <span class="text-danger" asp-validation-for="Salary"></span>
+
+
+    <input type="submit" class="btn btn-primary" />
+
+
+
+
+</form>

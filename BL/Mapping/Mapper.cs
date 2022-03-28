@@ -10,6 +10,9 @@ namespace AspGraduateProjAdminPan.BL.Mapping
             //here i injected the modelevm and entities
             CreateMap<DepartmentVM, Department>();
             CreateMap<Department, DepartmentVM>();
+            CreateMap<Employee , EmployeeVM>();
+            CreateMap<EmployeeVM, Employee>();
+            
 
         }
     }

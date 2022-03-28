@@ -59,16 +59,16 @@ namespace WebApplication7.BL.Repository
 
         public void Edit(DepartmentVM dpt)
         { ///Manula Mapping
-            //var OldData = db.Department.Find(dpt.Id);
+            //var newData = db.Department.Find(dpt.Id);
 
-            //OldData.DepartmentName = dpt.DepartmentName;
-            //OldData.DepartmentCode = dpt.DepartmentCode;
+            //newData.DepartmentName = dpt.DepartmentName;
+            //newData.DepartmentCode = dpt.DepartmentCode;
 
             ///using auto mapper
 
-         var   OldData=mapper.Map<Department>(dpt);
+         var   newData=mapper.Map<Department>(dpt);
             //modified using Id"Primary key" of Entiti 
-            db.Entry(OldData).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.Entry(newData).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 
             db.SaveChanges();
 
