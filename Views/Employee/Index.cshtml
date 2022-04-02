@@ -10,8 +10,11 @@
         <th>EmployeeEmail</th>
 
         <th>EmployeeAddress</th>
-        <th>EmployeeSalary</th>
+        <th>EmployeeDepId</th>
         <th>Employeedat</th>
+        <th>Edit</th>
+        <th>Delete</th>
+
 
     </tr>
     @foreach (var m in Model)
@@ -26,6 +29,8 @@
     <td>@m.Address</td>
     <td>@m.DepId</td>
     <td>@m.IsActive</td>
+    <td> <a asp-action="Edit" asp-controller="Employee" asp-route-id="@m.Id" class="btn btn-primary"> Eidt</a>  </td>
+    <td> <a asp-action="Delete" asp-controller="Employee" asp-route-id="@m.Id" class="btn btn-danger"> Delete</a>  </td>
 
 </tr>
 

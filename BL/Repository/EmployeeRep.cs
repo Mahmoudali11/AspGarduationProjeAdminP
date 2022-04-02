@@ -31,13 +31,26 @@ namespace WebApplication7.BL.Repository
 
         public void Delete(int id)
         {
-            throw new System.NotImplementedException();
-        }
+
+            var emp = dbContainer.Employee.Find(id);
+
+            dbContainer.Employee.Remove(emp);
+
+            dbContainer.SaveChanges();
+         }
 
         public void Edit(EmployeeVM dpt)
         {
-            throw new System.NotImplementedException();
-        }
+
+
+            var data = mapper.Map<Employee>(dpt);
+
+
+            dbContainer.Entry(data).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            dbContainer.SaveChanges();
+
+
+         }
 
         public IQueryable<EmployeeVM> Get() {
 
@@ -48,7 +61,10 @@ namespace WebApplication7.BL.Repository
 
         public EmployeeVM GetById(int id)
         {
-            throw new System.NotImplementedException();
-        }
+
+
+       var data=     dbContainer.Employee.Where(a=>a.Id==id).FirstOrDefault();
+            return mapper.Map<EmployeeVM>(data);
+         }
     }
 }
