@@ -10,8 +10,8 @@ using WebApplication7.DAL.Database;
 namespace AspGraduateProjAdminPan.Migrations
 {
     [DbContext(typeof(DbContainer))]
-    [Migration("20220328151919_editemp")]
-    partial class editemp
+    [Migration("20220402093346_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

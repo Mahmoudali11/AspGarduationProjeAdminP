@@ -31,7 +31,7 @@ namespace AspGraduateProjAdminPan.Migrations
                     Address = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
                     DepId = table.Column<int>(type: "int", nullable: false),
                     Salary = table.Column<double>(type: "float", nullable: false),
-                    MyProperty = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    HireDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true)
                 },
