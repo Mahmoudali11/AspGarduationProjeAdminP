@@ -1,5 +1,5 @@
 ﻿@model WebApplication7.Models.EmployeeVM
-@{ 
+@{
 
     ViewBag.Title = "create";
 }
@@ -8,44 +8,43 @@
 
 
     <label>Name Of Employee</label>
-    <input type="text" class="form-control" asp-for="Name" />
-    <span class="text-danger" asp-validation-for="Name"></span>
+        <input type="text" class="form-control" asp-for="Name" />
+        <span class="text-danger" asp-validation-for="Name"></span>
 
 
-    <label>Adreess Of Employee</label>
-    <input type="text" class="form-control" asp-for="Address" />
-    <span class="text-danger" asp-validation-for="Name"></span>
+        <label>Adreess Of Employee</label>
+        <input type="text" class="form-control" asp-for="Address" />
+        <span class="text-danger" asp-validation-for="Name"></span>
 
 
-    <div class="custom-control custom-checkbox">
-        <input type="checkbox" asp-for="IsActive" class="custom-control-input">
-        <label class="custom-control-label" asp-for="IsActive"> Is Active</label>
-    </div>
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" asp-for="IsActive" class="custom-control-input">
+            <label class="custom-control-label" asp-for="IsActive"> Is Active</label>
+        </div>
 
-    <label>Hire date Of Employee</label>
-    <input type="date" class="form-control" asp-for="HireDate" />
-    <span class="text-danger" asp-validation-for="Name"></span>
+        <label>Hire date Of Employee</label>
+        <input type="date" class="form-control" asp-for="HireDate" />
+        <span class="text-danger" asp-validation-for="Name"></span>
 
 
-    <label>Email Of Employee</label>
-    <input type="email" class="form-control" asp-for="Email" />
-    <span class="text-danger" asp-validation-for="Email"></span>
+        <label>Email Of Employee</label>
+        <input type="email" class="form-control" asp-for="Email" />
+        <span class="text-danger" asp-validation-for="Email"></span>
 
-    <br />
-    <br />
+        <br />
+        <br /> 
     <label asp-for="DepId">Department</label>
 
-    <select asp-for="DepId"   asp-items="@(SelectList)ViewBag.Deps">
-        <option>Choose Department..</option>
+    <select asp-for="DepId" asp-items="ViewBag.Deps" >
     </select>
 
     <br/>
-    <label>Salary Of Employee</label>
-    <input type="number" class="form-control" asp-for="Salary" />
-    <span class="text-danger" asp-validation-for="Salary"></span>
+        <label>Salary Of Employee</label>
+        <input type="number" class="form-control" asp-for="Salary" />
+        <span class="text-danger" asp-validation-for="Salary"></span>
 
 
-    <input type="submit" class="btn btn-primary"/>
+    <input type="submit" class="btn btn-primary" />
 
 
 
