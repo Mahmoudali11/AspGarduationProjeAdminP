@@ -76,7 +76,7 @@ namespace WebApplication7.Controllers
             //return Redirect("/Home/Index");
         }
 
-
+        [HttpGet]
         public IActionResult Create()
         {
             return View();

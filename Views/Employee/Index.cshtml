@@ -35,13 +35,17 @@
 
         <th>@SharedLocalizer["HireDate"]</th>
 
+ 
         <th>@SharedLocalizer["Adress"]</th>
         <th>@SharedLocalizer["DepartmentId"]</th>
+        <th>@SharedLocalizer["Salary"]</th>
         <th>@SharedLocalizer["IsActive"]</th>
         <th>@SharedLocalizer["DistrictId"]</th>
         <th>@SharedLocalizer["Edit"]</th>
-        <th>@SharedLocalizer["Delete"]</th>
 
+        <th>@SharedLocalizer["Delete"]</th>
+  
+ 
 
     </tr>
     @foreach (var m in Model)
@@ -55,6 +59,8 @@
     <td>@m.HireDate</td>
     <td>@m.Address</td>
     <td>@m.DepId</td>
+    <td>@m.Salary</td>
+
     <td>@m.IsActive</td>
     <td>@m.DistrictId</td>
     <td> <a asp-action="Edit" asp-controller="Employee" asp-route-id="@m.Id" class="btn btn-primary"> Eidt</a>  </td>

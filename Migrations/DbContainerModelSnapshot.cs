@@ -197,6 +197,11 @@ namespace AspGraduateProjAdminPan.Migrations
                 {
                     b.Navigation("Employees");
                 });
+
+            modelBuilder.Entity("WebApplication7.DAL.Entities.Department", b =>
+                {
+                    b.Navigation("Employees");
+                });
 #pragma warning restore 612, 618
         }
     }

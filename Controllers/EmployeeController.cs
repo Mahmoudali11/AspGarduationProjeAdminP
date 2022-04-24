@@ -40,9 +40,9 @@ namespace AspGraduateProjAdminPan.Controllers
         {
 
 
-            var data = department.Get();
-
-
+             var data=department.Get();
+ 
+ 
 
             ViewBag.Deps = new SelectList(data, "Id", "DepartmentName");
 
@@ -57,7 +57,11 @@ namespace AspGraduateProjAdminPan.Controllers
             return View();
 
 
+             ViewBag.Deps = new SelectList(data,"Id","DepartmentName");
+ 
+                return View();
 
+ 
 
         }
 
