@@ -12,6 +12,13 @@ using System.Threading.Tasks;
 using WebApplication7.DAL.Database;
 using Microsoft.EntityFrameworkCore;
 using AspGraduateProjAdminPan.BL.Mapping;
+using Newtonsoft.Json.Serialization;
+using AspGraduateProjAdminPan.BL.Interface;
+using AspGraduateProjAdminPan.BL.Repository;
+using Microsoft.AspNetCore.Mvc.Razor;
+using AspGraduateProjAdminPan.Resource;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 namespace WebApplication7
 {
@@ -28,12 +35,25 @@ namespace WebApplication7
         public void ConfigureServices(IServiceCollection services)
         {   
             /////////=>register controllers and views.
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().
+                //for localization/globalization.
+                AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                //for newtownsoft to help in Json formating.
+                .AddDataAnnotationsLocalization().AddNewtonsoftJson(opt => {
+                opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
+            });
+            
             //here apply singletone"or unit of work" using DI
             //create instance for each user... and this is most used
             //=>regester my services
             services.AddScoped<IDepartmentRep,DepartmentRep>();
             services.AddScoped<IEmployeeRep, EmployeeRep>();
+            services.AddScoped<ICountryRep, CountryRep>();
+
+            services.AddScoped<ICityRep, CityRep>();
+
+            services.AddScoped<IDistrictRep, DistrictRep>();
+
 
             //shared instance for all users
             //  services.AddSingleton<DepartmentRep>();
@@ -69,11 +89,38 @@ namespace WebApplication7
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+
+       
             app.UseStaticFiles();
 
             app.UseRouting();
 
             app.UseAuthorization();
+
+
+
+            /////////////localization////////////////////////
+
+            var supportedCultures = new[] {
+                  new CultureInfo("ar-EG"),
+                  new CultureInfo("en-US"),
+            };
+
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("ar-EG"),
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures,
+
+                //override default language which is en-US
+                RequestCultureProviders = new List<IRequestCultureProvider>
+                {
+                    new QueryStringRequestCultureProvider(),
+                    new CookieRequestCultureProvider()
+                }
+            });
 
             app.UseEndpoints(endpoints =>
             {
@@ -81,6 +128,10 @@ namespace WebApplication7
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+      
+
+
         }
     }
 }

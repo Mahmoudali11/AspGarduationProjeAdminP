@@ -5,9 +5,13 @@ using WebApplication7.DAL.Entities;
 using AspGraduateProjAdminPan.BL.Mapping;
 using WebApplication7.DAL.Database;
 using AutoMapper;
+using System;
+
+
 namespace WebApplication7.BL.Repository
 
 {
+  
     public class EmployeeRep : IEmployeeRep
     {
         private readonly DbContainer dbContainer;
@@ -51,12 +55,18 @@ namespace WebApplication7.BL.Repository
 
 
          }
+       EmployeeVM  CustomVm(Employee v)
+        {
 
+           return mapper.Map<EmployeeVM>(v);
+          //  x.DistrictId = v.District.Name;
+            
+
+        }
         public IQueryable<EmployeeVM> Get() {
+            
 
-
-
-            return dbContainer.Employee.Select(a=>mapper.Map<EmployeeVM>(a));
+            return dbContainer.Employee.Select(a =>new EmployeeVM() { Name=a.Name,Address=a.Address,DistrictId=a.District.Name,Email=a.Email,Salary=a.Salary,DepId=a.DepId,IsActive=a.IsActive,Id=a.Id,HireDate=a.HireDate});
          }
 
         public EmployeeVM GetById(int id)

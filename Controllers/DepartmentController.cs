@@ -17,7 +17,7 @@ namespace WebApplication7.Controllers
         //in this way is tightly coupled so this is not best practice better use loosly coupled
         //using Intertface to support multible Implemntaion and reduce coupling ;
         // private readonly DepartmentRep department;
-       
+
         //private readonly DepartmentRep department;
         //public DepartmentController(DepartmentRep department)
         //{
@@ -28,19 +28,19 @@ namespace WebApplication7.Controllers
         //this apply loosly coupled approach
         //Note interface better for Device resource because it  load its protocol methods
         //and others methods loaded in memory on request it.
-        private readonly IDepartmentRep department  ;
+        private readonly IDepartmentRep department;
         public DepartmentController(IDepartmentRep department)
         {
 
             ViewBag.d = 32;
             ViewData["t"] = "dsad";
-            Console.WriteLine($"ds{5+6}");
+            Console.WriteLine($"ds{5 + 6}");
             this.department = department;
             // this.department = department;
         }
         public IActionResult Index()
         {
-              
+
             //// View Data ==> Object
             //ViewData["x"] = "Hi I'm View Data";
 
@@ -109,17 +109,17 @@ namespace WebApplication7.Controllers
 
                 return View(dpt);
             }
-               
 
-                 
-            
-            
+
+
+
+
 
 
         }
         public IActionResult Edit(int id)
         {
-               var d=department.GetById(id);
+            var d = department.GetById(id);
 
             return View(d);
         }
@@ -178,8 +178,8 @@ namespace WebApplication7.Controllers
         {
             try
             {
-                    department.Delete(ID);
-                    return RedirectToAction("Index", "Department");
+                department.Delete(ID);
+                return RedirectToAction("Index", "Department");
             }
             catch (Exception ex)
             {
@@ -193,4 +193,5 @@ namespace WebApplication7.Controllers
 
 
     }
+
 }

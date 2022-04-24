@@ -19,6 +19,7 @@ namespace WebApplication7.DAL.Entities
 
         [StringLength(20)]
         public string DepartmentCode { get; set; }
+        public virtual ICollection<Employee> Employees { get; set; }
 
 
     }

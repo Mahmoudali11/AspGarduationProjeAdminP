@@ -6,6 +6,7 @@ using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
+using AspGraduateProjAdminPan.BL.Interface;
 
 namespace AspGraduateProjAdminPan.Controllers
 {
@@ -14,11 +15,17 @@ namespace AspGraduateProjAdminPan.Controllers
     {
         private readonly IEmployeeRep employee;
         private readonly IDepartmentRep department;
+        private readonly ICityRep city;
+        private readonly ICountryRep country;
+        private readonly IDistrictRep district;
 
-        public EmployeeController(IEmployeeRep employee, IDepartmentRep department)
+        public EmployeeController(IEmployeeRep employee, IDepartmentRep department,ICityRep city,ICountryRep country,IDistrictRep district)
         {
             this.employee = employee;
             this.department = department;
+            this.city = city;
+            this.country = country;
+            this.district = district;
         }
         public IActionResult Index()
         {
@@ -39,6 +46,14 @@ namespace AspGraduateProjAdminPan.Controllers
 
             ViewBag.Deps = new SelectList(data, "Id", "DepartmentName");
 
+
+
+            var countries = country.Get();
+
+            ViewBag.country = new SelectList(countries, "Id", "Name");
+
+            
+
             return View();
 
 
@@ -52,6 +67,15 @@ namespace AspGraduateProjAdminPan.Controllers
         [HttpPost]
         public IActionResult Create(EmployeeVM emp)
         {
+             
+
+
+
+            var countries = country.Get();
+
+            ViewBag.country = new SelectList(countries, "Id", "Name");
+
+
 
             var data = department.Get();
 
@@ -152,7 +176,7 @@ namespace AspGraduateProjAdminPan.Controllers
             try
             {
                 employee.Delete(ID);
-                return RedirectToAction("Index", "Department");
+                return RedirectToAction("Index", "Employee");
             }
             catch (Exception ex)
             {
@@ -164,8 +188,16 @@ namespace AspGraduateProjAdminPan.Controllers
             }
         }
 
+
+  
+
+     
+
     }
+  
 
 
 
 }
+
+

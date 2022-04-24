@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System;
- 
+using AspGraduateProjAdminPan.DAL.Entities;
 namespace WebApplication7.DAL.Entities
 {
     [Table("Emp")]
@@ -26,5 +26,8 @@ namespace WebApplication7.DAL.Entities
         public bool IsActive { get; set; }
         [MaxLength(50)]
         public string Email { get; set; }
+        public int DistrictId { get; set; }
+        [ForeignKey("DistrictId")]
+        public District District { get; set; }
     }
 }

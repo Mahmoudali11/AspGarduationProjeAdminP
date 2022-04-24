@@ -1,19 +1,46 @@
-﻿ @model IQueryable<WebApplication7.Models.EmployeeVM>
-<a asp-action="Create" asp-controller="Employee" class="btn btn-primary">Add Employee</a>
+﻿@model IQueryable<WebApplication7.Models.EmployeeVM>
+@using Microsoft.Extensions.Localization
+@using AspGraduateProjAdminPan.Resource.Department
+@*to access Key And Value in resource file ,make it globale tob accessable*@
+@inject IStringLocalizer<ShRes> SharedLocalizer
+@{
+    ViewBag.Title = SharedLocalizer["Employee"];
+}
+<head>
+
+    <script src="~/jquery/jquery.min.js"></script>
+
+<script >
+    $(function(){
+
+        $("#mr").text="fdf"
+
+        $("#mr").click(function(){
+           $("#mr").val("sd")
+           alert("s")
+        })
+    })
+</script>
+</head>
+<a asp-action="Create" asp-controller="Employee" class="btn btn-primary">@SharedLocalizer["Add"]</a>
+<a asp-controller="Employee" asp-action="Index" asp-route-culture="en-US">@SharedLocalizer["English"]</a>
+<a asp-controller="Employee" asp-action="Index" asp-route-culture="ar-EG">@SharedLocalizer["Arabic"]</a>
+
 <table class="table table-striped table-hover center-align">
     <tr>
 
 
-        <th>EmployeeId</th>
-        <th>EmployeeName</th>
+        <th>@SharedLocalizer["Id"]</th>
+        <th>@SharedLocalizer["Name"]</th>
 
-        <th>EmployeeEmail</th>
+        <th>@SharedLocalizer["HireDate"]</th>
 
-        <th>EmployeeAddress</th>
-        <th>EmployeeDepId</th>
-        <th>Employeedat</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th>@SharedLocalizer["Adress"]</th>
+        <th>@SharedLocalizer["DepartmentId"]</th>
+        <th>@SharedLocalizer["IsActive"]</th>
+        <th>@SharedLocalizer["DistrictId"]</th>
+        <th>@SharedLocalizer["Edit"]</th>
+        <th>@SharedLocalizer["Delete"]</th>
 
 
     </tr>
@@ -29,6 +56,7 @@
     <td>@m.Address</td>
     <td>@m.DepId</td>
     <td>@m.IsActive</td>
+    <td>@m.DistrictId</td>
     <td> <a asp-action="Edit" asp-controller="Employee" asp-route-id="@m.Id" class="btn btn-primary"> Eidt</a>  </td>
     <td> <a asp-action="Delete" asp-controller="Employee" asp-route-id="@m.Id" class="btn btn-danger"> Delete</a>  </td>
 
@@ -37,3 +65,7 @@
 
     }
 </table>
+
+<h1 id="mr">ddsd</h1>
+
+

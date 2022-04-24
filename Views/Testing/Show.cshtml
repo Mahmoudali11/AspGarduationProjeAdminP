@@ -1,0 +1,52 @@
+﻿@{
+
+    ViewBag.Title = "AjaxCall";
+}
+<input type="text" id="one" />
+<br />
+<input type="text" id="two" />
+
+
+<input  type="submit" class="btn btn-success" id="btn"  value="GetData"/>
+<h1 id="sh"> hi from ajax</h1>
+ 
+<script src="~/jquery/jquery.min.js">
+</script>
+<script>
+   $(function(){
+
+
+      
+
+        $("#btn").click(
+         
+
+
+       function(){
+
+let xx=parseInt( $("#one").val());
+       let yy=parseInt($("#two").val())
+                 $.ajax({
+                     type:"POST",
+
+        url:"/Testing/getUserData",
+        success:function(r){
+            alert(r)
+          $("#sh").text(r);
+        },
+        data:{
+
+
+            x:xx,
+            y:yy
+        }
+        
+        
+    })
+       }
+        
+    )
+   })
+ 
+
+</script>

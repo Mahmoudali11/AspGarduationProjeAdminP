@@ -40,7 +40,31 @@
     </select>
 
     <br/>
-    <label>Salary Of Employee</label>
+    <br />
+    @*////////////Adress//////////////////////*@
+    <label>Country</label><br />
+    <select  id="CountryId"  asp-items="@(SelectList)ViewBag.country">
+        <option>Choose Country.</option>
+    </select>
+
+       <br/>
+
+
+        <label>City</label><br />
+
+    <select   id="CI">
+        <option>Choose City.</option>
+    </select>
+
+    <br/>
+         <label>District</label><br />
+
+    <select asp-for="DistrictId"    id="districtId">
+        <option>Choose District.</option>
+    </select>
+
+    <br/>
+    <label>Salary Of Employee</label><br />
     <input type="number" class="form-control" asp-for="Salary" />
     <span class="text-danger" asp-validation-for="Salary"></span>
 
@@ -51,3 +75,75 @@
 
 
 </form>
+<script src="~/jquery/jquery.min.js"></script>
+
+@*ajax call*@
+<script>
+    $(function(){
+
+        $("#CountryId").change(function(){
+            ///remove previous selected///////////////
+                         $("#CI").empty();
+$("#CI").append("<option>Choose City</option>");
+           let C= $("#CountryId").val();
+            
+            $.ajax({
+
+                type: "POST",
+                url: "/EmployeeService/getCitiesByCountryId",
+                data: { id: C},
+                success: function (res) {
+                     //bootstarp select dosent support append jquery
+                     //because bootstarp_select add show only select button not select options
+                    $.each(res, function (i, e) {
+                         
+                      $("#CI").append("<option value='" + e.Id + "'>" + e.Name+"</option>");
+
+                  });
+
+                }
+
+            });
+
+        });
+        ///////////////////////Change of Citi trigger add to districs//
+         $("#CI").change(function(){
+             $("#districtId").empty();
+             
+             $("#districtId").append("<option>Choose District</option>");
+
+           let C= $("#CI").val();
+            
+            $.ajax({
+
+                type: "POST",
+                url: "/EmployeeService/getDistrictsByCitiyId",
+                data: { id: C},
+                success: function (res) {
+                     //bootstarp select dosent support append jquery
+                     //because bootstarp_select add show only select button not select options
+                    $.each(res, function (i, e) {
+                        
+                      $("#districtId").append("<option value='" + e.Id + "'>" + e.Name+"</option>");
+
+                  });
+
+
+                },
+                //error:function(e){
+                //    alert("Sommthing erro try agin"+e)
+                //}
+
+            });
+
+        });
+
+
+
+
+
+
+    });
+
+
+</script>

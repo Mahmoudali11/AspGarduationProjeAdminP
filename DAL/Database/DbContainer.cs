@@ -1,5 +1,6 @@
 ﻿ using Microsoft.EntityFrameworkCore;
 using System;
+using AspGraduateProjAdminPan.DAL.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,6 +12,9 @@ namespace WebApplication7.DAL.Database
     {
         public DbSet<Department> Department { get; set; }
         public DbSet<Employee> Employee { get; set; }
+        public DbSet<City> City { get; set; }
+        public DbSet<Country> Country { set; get; }
+        public DbSet<District> District { get; set; }
         //this override onConfiguring method..
         public DbContainer(DbContextOptions options):base(options)
         {
