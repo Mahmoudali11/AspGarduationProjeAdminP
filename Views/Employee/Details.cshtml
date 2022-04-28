@@ -1,0 +1,84 @@
+﻿
+
+ 
+@model WebApplication7.Models.EmployeeVM
+@{ 
+
+    ViewBag.Title = "Deatils";
+}
+    <link href="~/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+
+
+<form asp-action="Index" method="get" asp-controller="Employee" class="form-group">
+
+
+    <label>Name Of Employee</label>
+    <input type="text" disabled class="form-control" asp-for="Name" />
+    <span class="text-danger" asp-validation-for="Name"></span>
+    <br /><br />
+
+    <label asp-for="Salary">Employee Salary</label>
+    <input type="text"disabled asp-for="Salary" class="form-control" />
+    <span class="text-danger" asp-validation-for="Salary"></span>
+    <br /><br />
+
+    <label>Adreess Of Employee</label>
+    <input type="text" disabled class="form-control" asp-for="Address" />
+    <span class="text-danger" disabled asp-validation-for="Name"></span>
+
+
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" disabled asp-for="IsActive" class="custom-control-input">
+        <label class="custom-control-label" asp-for="IsActive"> Is Active</label>
+    </div>
+
+    <label>Hire date Of Employee</label>
+    <input type="date" disabled class="form-control" asp-for="HireDate" />
+    <span class="text-danger" asp-validation-for="Name"></span>
+
+
+    <label>Email Of Employee</label>
+    <input type="email"disabled class="form-control" asp-for="Email" />
+    <span class="text-danger" asp-validation-for="Email"></span>
+
+    <br />
+    <br />
+    <label asp-for="DepId">Department</label>
+
+    <select asp-for="DepId" disabled  asp-items="@(SelectList)ViewBag.Deps">
+        <option>Choose Department..</option>
+    </select>
+
+
+    <br /><br />
+    <label>Country</label>
+    <select id="CountryId"disabled asp-items="@(SelectList)ViewBag.country">
+        <option>Choose Country</option>
+    </select>
+    <br /><br />
+
+
+    <label>City</label>
+    <select disabled id="CityId" asp-items="@(SelectList)ViewBag.city">
+        <option>Choose City</option>
+    </select>
+    <br /><br />
+
+
+    <label id="DistrictId">District</label>
+    <select disabled    asp-items="@(SelectList)ViewBag.district">
+        <option>Choose District</option>
+    </select>
+    <span class="text-danger" asp-validation-for="DistrictId"></span>
+    <br /><br />
+
+
+     
+
+    <br />
+    <center>
+        <input type="submit" value="Back" class="btn btn-primary" />
+    </center>
+
+</form>
+ 

@@ -16,11 +16,10 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" type="text/css">
-    @*<link href="~/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />*@
-    <!-- Bootstrap Core Css -->
+     <!-- Bootstrap Core Css for data_tables ... -->
     <link href="~/plugins/bootstrap/css/bootstrap.css" rel="stylesheet">
-
-   <link href="~/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />
+    <link href="~/plugins/jquery-datatable/skin/bootstrap/css/dataTables.bootstrap.css"  rel="stylesheet"/>
+    @*<link href="~/plugins/bootstrap-select/css/bootstrap-select.css" rel="stylesheet" />*@
 
     <!-- Waves Effect Css -->
     <link href="~/plugins/node-waves/waves.css" rel="stylesheet" />
@@ -36,6 +35,8 @@
 
     <!-- AdminBSB Themes. You can choose a theme from css/themes instead of get all themes -->
     <link href="~/css/themes/all-themes.css" rel="stylesheet" />
+    
+
 </head>
 
 <body class="theme-red">
@@ -840,9 +841,12 @@
 
     <!-- Bootstrap Core Js -->
     <script src="~/plugins/bootstrap/js/bootstrap.js"></script>
-
+    <!--for dataTable-->
+    <script src="~/plugins/jquery-datatable/jquery.dataTables.js"></script>
+    <script src="~/plugins/jquery-datatable/skin/bootstrap/js/dataTables.bootstrap.js"></script>
     <!-- Select Plugin Js -->
     <script src="~/plugins/bootstrap-select/js/bootstrap-select.js"></script>
+    
 
     <!-- Slimscroll Plugin Js -->
     <script src="~/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
@@ -872,10 +876,13 @@
 
     <!-- Custom Js -->
     <script src="~/js/admin.js"></script>
-    <script src="~/js/pages/index.js"></script>
+    @*<script src="~/js/pages/index.js"></script>*@
 
     <!-- Demo Js -->
     <script src="~/js/demo.js"></script>
+    <!-- for data table --> 
+    @RenderSection("DataTableEmp",required:false);
+   
 </body>
 
 </html>

@@ -19,7 +19,11 @@ namespace WebApplication7.Models
         [MaxLength(50)]
         [Required(ErrorMessage ="email address is reqiured")]
         public string Email { get; set; }
+        [Required]
         public string DistrictId { get; set; }
+        
+        public int DistId { get; set; }
+
 
 
     }

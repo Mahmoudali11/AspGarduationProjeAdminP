@@ -13,7 +13,12 @@
     <label>Name Of Employee</label>
     <input type="text" class="form-control" asp-for="Name" />
     <span class="text-danger" asp-validation-for="Name"></span>
+    <br /><br />
 
+    <label asp-for="Salary">Employee Salary</label>
+    <input type="text" asp-for="Salary" class="form-control" />
+    <span class="text-danger" asp-validation-for="Salary"></span>
+    <br /><br />
 
     <label>Adreess Of Employee</label>
     <input type="text" class="form-control" asp-for="Address" />
@@ -42,15 +47,103 @@
         <option>Choose Department..</option>
     </select>
 
-    <br/>
-    <label>Salary Of Employee</label>
-    <input type="number" class="form-control" asp-for="Salary" />
-    <span class="text-danger" asp-validation-for="Salary"></span>
 
 
-    <input type="submit" class="btn btn-primary"/>
+    <label>Country</label>
+    <select id="CountryId" asp-items="@(SelectList)ViewBag.country">
+        <option>Choose Country</option>
+    </select>
+    <br /><br />
 
 
+    <label>City</label>
+    <select id="CityId">
+        <option>Choose City</option>
+    </select>
+    <br /><br />
 
+
+    <label asp-for="DistrictId">District</label>
+    <select asp-for="DistrictId">
+        <option>Choose District</option>
+    </select>
+    <span class="text-danger" asp-validation-for="DistrictId"></span>
+    <br /><br />
+
+
+     
+
+    <br />
+    <center>
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </center>
 
 </form>
+
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+<script>
+
+    $(function () {
+
+        // Get City Data
+        $("#CountryId").change(function () {
+
+            $("#CityId").empty();
+            $("#CityId").append("<option>Choose City</option>");
+
+            var countryId = $("#CountryId").val(); 
+
+            $.ajax({
+
+                type: "POST",
+                url: "/EmployeeService/getCitiesByCountryId",
+                data: { id: countryId },
+                success: function (res) {
+
+                    $.each(res, function (i, e) {
+
+                        $("#CityId").append("<option value='" + e.Id + "'>" + e.Name+"</option>");
+
+                    });
+
+                }
+
+            });
+
+        });
+
+
+        // Get District Data
+        $("#CityId").change(function () {
+
+            $("#DistrictId").empty();
+            $("#DistrictId").append("<option>Choose District</option>");
+
+            var cityId = $("#CityId").val();
+
+            $.ajax({
+
+                type: "POST",
+                url: "/EmployeeService/getDistrictsByCitiyId",
+                data: { id: cityId },
+                success: function (res) {
+
+                    $.each(res, function (i, e) {
+
+                        $("#DistrictId").append("<option value='" + e.Id + "'>" + e.Name + "</option>");
+
+                    });
+
+                }
+
+            });
+
+        });
+
+    });
+
+
+</script>

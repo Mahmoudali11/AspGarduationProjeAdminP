@@ -1,155 +1,150 @@
 ﻿@model WebApplication7.Models.EmployeeVM
 @{
-
-    ViewBag.Title = "create";
+    ViewBag.Title = "Create Employee";
 }
 
-<form asp-action="Create" method="post" asp-controller="Employee" class="form-group">
+<h2>Create Employee</h2>
 
 
-    <label>Name Of Employee</label>
-        <input type="text" class="form-control" asp-for="Name" />
-        <span class="text-danger" asp-validation-for="Name"></span>
+<form asp-controller="Employee" asp-action="Create" method="post" class="form-group">
 
+    <label asp-for="Name">Employee Name</label>
+    <input type="text" asp-for="Name" class="form-control" />
+    <span class="text-danger" asp-validation-for="Name"></span>
+    <br /><br />
 
-        <label>Adreess Of Employee</label>
-        <input type="text" class="form-control" asp-for="Address" />
-        <span class="text-danger" asp-validation-for="Name"></span>
-
-
-        <div class="custom-control custom-checkbox">
-            <input type="checkbox" asp-for="IsActive" class="custom-control-input">
-            <label class="custom-control-label" asp-for="IsActive"> Is Active</label>
-        </div>
-
-        <label>Hire date Of Employee</label>
-        <input type="date" class="form-control" asp-for="HireDate" />
-        <span class="text-danger" asp-validation-for="Name"></span>
-
-
-        <label>Email Of Employee</label>
-        <input type="email" class="form-control" asp-for="Email" />
-        <span class="text-danger" asp-validation-for="Email"></span>
-
-        <br />
-        <br /> 
-    <label asp-for="DepId">Department</label>
-
-    <select asp-for="DepId" asp-items="ViewBag.Deps" >
-    </select>
-
-    <br/>
-<<<<<<< HEAD
-    <br />
-    @*////////////Adress//////////////////////*@
-    <label>Country</label><br />
-    <select  id="CountryId"  asp-items="@(SelectList)ViewBag.country">
-        <option>Choose Country.</option>
-    </select>
-
-       <br/>
-
-
-        <label>City</label><br />
-
-    <select   id="CI">
-        <option>Choose City.</option>
-    </select>
-
-    <br/>
-         <label>District</label><br />
-
-    <select asp-for="DistrictId"    id="districtId">
-        <option>Choose District.</option>
-    </select>
-
-    <br/>
-    <label>Salary Of Employee</label><br />
-    <input type="number" class="form-control" asp-for="Salary" />
+    <label asp-for="Salary">Employee Salary</label>
+    <input type="text" asp-for="Salary" class="form-control" />
     <span class="text-danger" asp-validation-for="Salary"></span>
-=======
-        <label>Salary Of Employee</label>
-        <input type="number" class="form-control" asp-for="Salary" />
-        <span class="text-danger" asp-validation-for="Salary"></span>
->>>>>>> refs/remotes/origin/master
+    <br /><br />
+
+    <label asp-for="Address">Employee Address</label>
+    <input type="text" asp-for="Address" class="form-control" />
+    <span class="text-danger" asp-validation-for="Address"></span>
+    <br /><br />
+
+    <label asp-for="Email">Employee Email</label>
+    <input type="email" asp-for="Email" class="form-control" />
+    <span class="text-danger" asp-validation-for="Email"></span>
+    <br /><br />
 
 
-    <input type="submit" class="btn btn-primary" />
+    <label asp-for="HireDate">Hire Date</label>
+    <input type="date" asp-for="HireDate" class="form-control" />
+    <span class="text-danger" asp-validation-for="HireDate"></span>
+    <br /><br />
+
+
+      <br /><br />
+
+
+    <label asp-for="DepId">Department</label>
+    <select asp-for="DepId" asp-items="@(SelectList)ViewBag.Deps">
+        <option>Choose Department</option>
+    </select>
+     <br /><br />
+
+
+    <label>Country</label>
+    <select id="CountryId" asp-items="@(SelectList)ViewBag.country">
+        <option>Choose Country</option>
+    </select>
+    <br /><br />
+
+
+    <label>City</label>
+    <select id="CityId">
+        <option>Choose City</option>
+    </select>
+    <br /><br />
+
+
+    <label asp-for="DistrictId">District</label>
+    <select asp-for="DistrictId">
+        <option>Choose District</option>
+    </select>
+    <span class="text-danger" asp-validation-for="DistrictId"></span>
+    <br /><br />
 
 
 
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" asp-for="IsActive" class="custom-control-input">
+        <label class="custom-control-label" asp-for="IsActive"> Is Active</label>
+    </div>
+    <span class="text-danger" asp-validation-for="IsActive"></span>
+
+    <br />
+    <center>
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </center>
 
 </form>
- <script src="~/jquery/jquery.min.js"></script>
 
-@*ajax call*@
+<script src="~/jquery/jquery.min.js"></script>
+<script src="~/jquery-validate/jquery.validate.js"></script>
+<script src="~/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
 <script>
-    $(function(){
 
-        $("#CountryId").change(function(){
-            ///remove previous selected///////////////
-                         $("#CI").empty();
-$("#CI").append("<option>Choose City</option>");
-           let C= $("#CountryId").val();
-            
+    $(function () {
+
+        // Get City Data
+        $("#CountryId").change(function () {
+
+            $("#CityId").empty();
+            $("#CityId").append("<option>Choose City</option>");
+
+            var countryId = $("#CountryId").val(); 
+
             $.ajax({
 
                 type: "POST",
                 url: "/EmployeeService/getCitiesByCountryId",
-                data: { id: C},
+                data: { id: countryId },
                 success: function (res) {
-                     //bootstarp select dosent support append jquery
-                     //because bootstarp_select add show only select button not select options
-                    $.each(res, function (i, e) {
-                         
-                      $("#CI").append("<option value='" + e.Id + "'>" + e.Name+"</option>");
 
-                  });
+                    $.each(res, function (i, e) {
+
+                        $("#CityId").append("<option value='" + e.Id + "'>" + e.Name+"</option>");
+
+                    });
 
                 }
 
             });
 
         });
-        ///////////////////////Change of Citi trigger add to districs//
-         $("#CI").change(function(){
-             $("#districtId").empty();
-             
-             $("#districtId").append("<option>Choose District</option>");
 
-           let C= $("#CI").val();
-            
+
+        // Get District Data
+        $("#CityId").change(function () {
+
+            $("#DistrictId").empty();
+            $("#DistrictId").append("<option>Choose District</option>");
+
+            var cityId = $("#CityId").val();
+
             $.ajax({
 
                 type: "POST",
                 url: "/EmployeeService/getDistrictsByCitiyId",
-                data: { id: C},
+                data: { id: cityId },
                 success: function (res) {
-                     //bootstarp select dosent support append jquery
-                     //because bootstarp_select add show only select button not select options
+
                     $.each(res, function (i, e) {
-                        
-                      $("#districtId").append("<option value='" + e.Id + "'>" + e.Name+"</option>");
 
-                  });
+                        $("#DistrictId").append("<option value='" + e.Id + "'>" + e.Name + "</option>");
 
+                    });
 
-                },
-                //error:function(e){
-                //    alert("Sommthing erro try agin"+e)
-                //}
+                }
 
             });
 
         });
 
-
-
-
-
-
     });
 
 
 </script>
- 

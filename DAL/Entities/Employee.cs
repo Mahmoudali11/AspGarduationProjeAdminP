@@ -26,6 +26,7 @@ namespace WebApplication7.DAL.Entities
         public bool IsActive { get; set; }
         [MaxLength(50)]
         public string Email { get; set; }
+        [Required]
         public int DistrictId { get; set; }
         [ForeignKey("DistrictId")]
         public District District { get; set; }

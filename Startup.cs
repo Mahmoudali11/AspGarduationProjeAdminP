@@ -91,15 +91,6 @@ namespace WebApplication7
             }
 
 
-       
-            app.UseStaticFiles();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
-
-
-
             /////////////localization////////////////////////
 
             var supportedCultures = new[] {
@@ -121,6 +112,15 @@ namespace WebApplication7
                     new CookieRequestCultureProvider()
                 }
             });
+
+            app.UseStaticFiles();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+
+
 
             app.UseEndpoints(endpoints =>
             {

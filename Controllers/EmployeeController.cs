@@ -34,6 +34,36 @@ namespace AspGraduateProjAdminPan.Controllers
 
             return View(d);
         }
+        public IActionResult IndexDataT()
+        {
+
+            var d = employee.Get();
+
+            return View(d);
+        }
+        public IActionResult Details(int id)
+        {
+
+
+
+            var d = employee.Get();
+            var selectedDep = employee.GetById(id);
+            ViewBag.Deps = new SelectList(department.Get(), "Id", "DepartmentName", selectedDep.DepId);
+            var countries = country.Get();
+            var cityr=city.Get();
+            var districts=district.Get();
+             var empdistrict = district.GetById(selectedDep.DistId);
+            var empcity = city.GetById(empdistrict.CityId);
+            var empCountry = country.GetById(empcity.CountryId);
+            ViewBag.district = new SelectList(districts, "Id", "Name", empdistrict.Id);
+
+            ViewBag.city = new SelectList(cityr, "Id", "Name", empcity.Id);
+
+            ViewBag.country = new SelectList(countries, "Id", "Name",empCountry.Id);
+
+            return View(selectedDep);
+
+        }
 
         [HttpGet]
         public IActionResult Create()
@@ -52,14 +82,11 @@ namespace AspGraduateProjAdminPan.Controllers
 
             ViewBag.country = new SelectList(countries, "Id", "Name");
 
-            
+
 
             return View();
 
-
-             ViewBag.Deps = new SelectList(data,"Id","DepartmentName");
  
-                return View();
 
  
 
@@ -75,17 +102,9 @@ namespace AspGraduateProjAdminPan.Controllers
 
 
 
-            var countries = country.Get();
 
-            ViewBag.country = new SelectList(countries, "Id", "Name");
+            
 
-
-
-            var data = department.Get();
-
-
-
-            ViewBag.Deps = new SelectList(data, "Id", "DepartmentName");
             try
             {
                 if (ModelState.IsValid)
@@ -97,14 +116,31 @@ namespace AspGraduateProjAdminPan.Controllers
 
 
                 }
-                else return View(emp);
+                else {
+
+                    var countries = country.Get();
+
+                    ViewBag.country = new SelectList(countries, "Id", "Name");
+
+
+
+                    var data = department.Get();
+                    ViewBag.Deps = new SelectList(data, "Id", "DepartmentName");
+
+
+                    return View(emp); }
+
 
 
             }
             catch (Exception r)
             {
                 Console.WriteLine(r.Message);
-                return View();
+
+                EventLog log = new EventLog();
+                log.Source = "Admin Dashboard";
+                log.WriteEntry(r.Message, EventLogEntryType.Error);
+                return View(emp);
             }
 
 
@@ -113,9 +149,21 @@ namespace AspGraduateProjAdminPan.Controllers
         }
         public IActionResult Edit(int id)
         {
+
+            var selectedDep = employee.GetById(id);
             var d = employee.GetById(id);
 
-            ViewBag.Deps = new SelectList(department.Get(), "Id", "DepartmentName");
+            ViewBag.Deps = new SelectList(department.Get(), "Id", "DepartmentName",selectedDep.DepId);
+
+            var countries = country.Get();
+            /*
+            Console.WriteLine("???????????????????????"+d.DistId);
+            var empdistrict = district.GetById(d.DistId);
+            var empcity = city.GetById(empdistrict.CityId);
+            var empCountry = country.GetById(empcity.CountryId);*/
+
+
+            ViewBag.country = new SelectList(countries, "Id", "Name" );
 
             return View(d);
         }
@@ -128,18 +176,35 @@ namespace AspGraduateProjAdminPan.Controllers
         [HttpPost]
         public IActionResult Edit(EmployeeVM dep)
         {
+
+
+            /*    var empdistrict = district.GetById(dep.DistId);
+                var empcity = city.GetById(empdistrict.CityId);
+                var empCountry = country.GetById(empcity.CountryId);*/
+
+
+
+
             try
             {
                 if (ModelState.IsValid)
                 {
-
+                    Console.WriteLine( "saved");
 
 
                     employee.Edit(dep);
-                    return RedirectToAction("Index", "Employee");
+                    return RedirectToAction("Index");
                 }
                 else
                 {
+
+                    var selectedDep = employee.GetById(dep.Id);
+
+                    ViewBag.Deps = new SelectList(department.Get(), "Id", "DepartmentName", selectedDep.DepId);
+
+                    var countries = country.Get();
+                    ViewBag.country = new SelectList(countries, "Id", "Name"/*, empCountry.Id*/);
+
 
 
                     return View(dep);
@@ -149,9 +214,12 @@ namespace AspGraduateProjAdminPan.Controllers
             {
 
 
+                Console.WriteLine(  ex.Message);
+
+
                 EventLog log = new EventLog();
-                log.Source = "Admin Dashboard";
-                log.WriteEntry("bbbbs", EventLogEntryType.Error);
+                log.Source = "mrwerwer";
+                log.WriteEntry(ex.Message, EventLogEntryType.Error);
 
                 return View(dep);
 

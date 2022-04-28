@@ -66,14 +66,14 @@ namespace WebApplication7.BL.Repository
         public IQueryable<EmployeeVM> Get() {
             
 
-            return dbContainer.Employee.Select(a =>new EmployeeVM() { Name=a.Name,Address=a.Address,DistrictId=a.District.Name,Email=a.Email,Salary=a.Salary,DepId=a.DepId,IsActive=a.IsActive,Id=a.Id,HireDate=a.HireDate});
+            return dbContainer.Employee.Select(a =>new EmployeeVM() { Name=a.Name,Address=a.Address,DistrictId=a.District.Name,Email=a.Email,Salary=a.Salary,DepId=a.DepId,IsActive=a.IsActive,Id=a.Id,HireDate=a.HireDate,DistId=a.District.Id});
          }
 
         public EmployeeVM GetById(int id)
         {
 
 
-       var data=     dbContainer.Employee.Where(a=>a.Id==id).FirstOrDefault();
+       var data=     dbContainer.Employee.Where(a=>a.Id==id).Select(a=> new EmployeeVM() { Name = a.Name, Address = a.Address, DistrictId = a.District.Name, Email = a.Email, Salary = a.Salary, DepId = a.DepId, IsActive = a.IsActive, Id = a.Id, HireDate = a.HireDate, DistId = a.District.Id }).FirstOrDefault();
             return mapper.Map<EmployeeVM>(data);
          }
     }

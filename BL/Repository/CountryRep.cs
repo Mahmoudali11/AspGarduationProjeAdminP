@@ -33,7 +33,7 @@ namespace AspGraduateProjAdminPan.BL.Repository
         {
 
 
-            var data = dbContainer.Employee.Where(a => a.Id == id).FirstOrDefault();
+            var data = dbContainer.Country.Where(a => a.Id == id).FirstOrDefault();
             return mapper.Map<CountryVM>(data);
 
         }
