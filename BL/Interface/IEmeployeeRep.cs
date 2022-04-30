@@ -1,5 +1,5 @@
-﻿using WebApplication7.Models;
-using System.Linq;
+﻿using System.Linq;
+using WebApplication7.Models;
 namespace WebApplication7.BL.Interface
 
 {

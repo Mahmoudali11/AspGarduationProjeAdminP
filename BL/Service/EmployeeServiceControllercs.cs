@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspGraduateProjAdminPan.BL.Interface;
+using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-using AspGraduateProjAdminPan.BL.Interface;
-using AspGraduateProjAdminPan.BL.Repository;
 
 
 namespace AspGraduateProjAdminPan.BL.Service
@@ -9,18 +8,18 @@ namespace AspGraduateProjAdminPan.BL.Service
 /// Used for ajax Call............. for good practice
 /// </summary>
     public class EmployeeServiceControllercs : Controller
-       
+
     {
         private readonly ICityRep city;
         private readonly IDistrictRep district;
 
-        public EmployeeServiceControllercs(ICityRep city,IDistrictRep district)
+        public EmployeeServiceControllercs(ICityRep city, IDistrictRep district)
         {
             this.city = city;
             this.district = district;
         }
 
- 
+
         [HttpPost]
         [Route("/EmployeeService/getCitiesByCountryId")]
         public JsonResult getCitiesByCountryId(int id)

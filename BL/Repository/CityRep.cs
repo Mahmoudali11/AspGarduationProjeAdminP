@@ -1,9 +1,9 @@
-﻿ 
-  using AspGraduateProjAdminPan.Models;
+﻿
 using AspGraduateProjAdminPan.BL.Interface;
+using AspGraduateProjAdminPan.Models;
+using AutoMapper;
 using System.Linq;
 using WebApplication7.DAL.Database;
-using AutoMapper;
 
 namespace AspGraduateProjAdminPan.BL.Repository
 {
@@ -30,7 +30,7 @@ namespace AspGraduateProjAdminPan.BL.Repository
             return dbContainer.City.Select(a => new CityVM { Id = a.Id, Name = a.Name, CountryId = a.CountryId });
         }
 
-        public CityVM  GetById(int id)
+        public CityVM GetById(int id)
         {
 
 

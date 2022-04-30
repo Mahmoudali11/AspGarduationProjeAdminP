@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AutoMapper;
 using System.Linq;
-using System.Threading.Tasks;
 using WebApplication7.BL.Interface;
 using WebApplication7.DAL.Database;
 using WebApplication7.DAL.Entities;
 using WebApplication7.Models;
-using AutoMapper;
 
 namespace WebApplication7.BL.Repository
 {
@@ -16,7 +13,7 @@ namespace WebApplication7.BL.Repository
         private readonly IMapper mapper;
 
         //  private DbContainer db = new DbContainer();
-        public DepartmentRep(DbContainer db,IMapper mapper)
+        public DepartmentRep(DbContainer db, IMapper mapper)
         {
             this.db = db;
             this.mapper = mapper;
@@ -51,7 +48,7 @@ namespace WebApplication7.BL.Repository
             //d.DepartmentName = dpt.DepartmentName;
             //d.DepartmentCode = dpt.DepartmentCode;
 
-            var d=mapper.Map<Department>(dpt);
+            var d = mapper.Map<Department>(dpt);
 
             db.Department.Add(d);
             db.SaveChanges();
@@ -66,7 +63,7 @@ namespace WebApplication7.BL.Repository
 
             ///using auto mapper
 
-         var   newData=mapper.Map<Department>(dpt);
+            var newData = mapper.Map<Department>(dpt);
             //modified using Id"Primary key" of Entiti 
             db.Entry(newData).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
 
@@ -82,5 +79,5 @@ namespace WebApplication7.BL.Repository
         }
     }
 
-   
+
 }

@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using WebApplication7.BL.Repository;
+﻿using AspGraduateProjAdminPan.BL.Interface;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Diagnostics;
 using WebApplication7.BL.Interface;
 using WebApplication7.Models;
-using System;
-using System.Linq;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Diagnostics;
-using AspGraduateProjAdminPan.BL.Interface;
 
 namespace AspGraduateProjAdminPan.Controllers
 {
@@ -19,7 +17,7 @@ namespace AspGraduateProjAdminPan.Controllers
         private readonly ICountryRep country;
         private readonly IDistrictRep district;
 
-        public EmployeeController(IEmployeeRep employee, IDepartmentRep department,ICityRep city,ICountryRep country,IDistrictRep district)
+        public EmployeeController(IEmployeeRep employee, IDepartmentRep department, ICityRep city, ICountryRep country, IDistrictRep district)
         {
             this.employee = employee;
             this.department = department;
@@ -50,16 +48,16 @@ namespace AspGraduateProjAdminPan.Controllers
             var selectedDep = employee.GetById(id);
             ViewBag.Deps = new SelectList(department.Get(), "Id", "DepartmentName", selectedDep.DepId);
             var countries = country.Get();
-            var cityr=city.Get();
-            var districts=district.Get();
-             var empdistrict = district.GetById(selectedDep.DistId);
+            var cityr = city.Get();
+            var districts = district.Get();
+            var empdistrict = district.GetById(selectedDep.DistrictId);
             var empcity = city.GetById(empdistrict.CityId);
             var empCountry = country.GetById(empcity.CountryId);
             ViewBag.district = new SelectList(districts, "Id", "Name", empdistrict.Id);
 
             ViewBag.city = new SelectList(cityr, "Id", "Name", empcity.Id);
 
-            ViewBag.country = new SelectList(countries, "Id", "Name",empCountry.Id);
+            ViewBag.country = new SelectList(countries, "Id", "Name", empCountry.Id);
 
             return View(selectedDep);
 
@@ -70,9 +68,9 @@ namespace AspGraduateProjAdminPan.Controllers
         {
 
 
-             var data=department.Get();
- 
- 
+            var data = department.Get();
+
+
 
             ViewBag.Deps = new SelectList(data, "Id", "DepartmentName");
 
@@ -86,9 +84,9 @@ namespace AspGraduateProjAdminPan.Controllers
 
             return View();
 
- 
 
- 
+
+
 
         }
 
@@ -98,12 +96,12 @@ namespace AspGraduateProjAdminPan.Controllers
         [HttpPost]
         public IActionResult Create(EmployeeVM emp)
         {
-             
 
 
 
 
-            
+
+
 
             try
             {
@@ -116,7 +114,8 @@ namespace AspGraduateProjAdminPan.Controllers
 
 
                 }
-                else {
+                else
+                {
 
                     var countries = country.Get();
 
@@ -128,7 +127,8 @@ namespace AspGraduateProjAdminPan.Controllers
                     ViewBag.Deps = new SelectList(data, "Id", "DepartmentName");
 
 
-                    return View(emp); }
+                    return View(emp);
+                }
 
 
 
@@ -153,7 +153,7 @@ namespace AspGraduateProjAdminPan.Controllers
             var selectedDep = employee.GetById(id);
             var d = employee.GetById(id);
 
-            ViewBag.Deps = new SelectList(department.Get(), "Id", "DepartmentName",selectedDep.DepId);
+            ViewBag.Deps = new SelectList(department.Get(), "Id", "DepartmentName", selectedDep.DepId);
 
             var countries = country.Get();
             /*
@@ -163,7 +163,7 @@ namespace AspGraduateProjAdminPan.Controllers
             var empCountry = country.GetById(empcity.CountryId);*/
 
 
-            ViewBag.country = new SelectList(countries, "Id", "Name" );
+            ViewBag.country = new SelectList(countries, "Id", "Name");
 
             return View(d);
         }
@@ -189,7 +189,7 @@ namespace AspGraduateProjAdminPan.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    Console.WriteLine( "saved");
+                    Console.WriteLine("saved");
 
 
                     employee.Edit(dep);
@@ -197,6 +197,7 @@ namespace AspGraduateProjAdminPan.Controllers
                 }
                 else
                 {
+                    Console.WriteLine("Error in edit ation");
 
                     var selectedDep = employee.GetById(dep.Id);
 
@@ -214,7 +215,7 @@ namespace AspGraduateProjAdminPan.Controllers
             {
 
 
-                Console.WriteLine(  ex.Message);
+                Console.WriteLine(ex.Message);
 
 
                 EventLog log = new EventLog();
@@ -261,12 +262,12 @@ namespace AspGraduateProjAdminPan.Controllers
         }
 
 
-  
 
-     
+
+
 
     }
-  
+
 
 
 

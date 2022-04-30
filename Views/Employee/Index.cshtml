@@ -1,6 +1,6 @@
 ﻿@model IQueryable<WebApplication7.Models.EmployeeVM>
 @using Microsoft.Extensions.Localization
-@using AspGraduateProjAdminPan.Resource.Department
+@using AspGraduateProjAdminPan.Resource.Employee
 @*to access Key And Value in resource file ,make it globale tob accessable*@
 @inject IStringLocalizer<ShRes> SharedLocalizer
 @{
@@ -57,10 +57,10 @@
 
                                     <th>@SharedLocalizer["HireDate"]</th>
 
-                                    <th>@SharedLocalizer["District"]</th>
+                                    <th>@SharedLocalizer["DistrictId"]</th>
                                     <th>@SharedLocalizer["Edit"]</th>
                                     <th>@SharedLocalizer["Delete"]</th>
-                                    <th>@SharedLocalizer["Edit"]</th>
+                                    <th>@SharedLocalizer["Details"]</th>
 
 
 
@@ -79,9 +79,9 @@
 
 
                                         <td>@m.DistrictId</td>
-                                        <td> <a asp-action="Edit" asp-controller="Employee" asp-route-id="@m.Id" class="btn btn-primary"> Eidt</a>  </td>
-                                        <td> <a asp-action="Delete" asp-controller="Employee" asp-route-id="@m.Id" class="btn btn-danger"> Delete</a>  </td>
-                                        <td> <a asp-action="Details" asp-controller="Employee" asp-route-id="@m.Id" class="btn btn-info"> Edit</a>  </td>
+                                        <td> <a asp-action="Edit" asp-controller="Employee" asp-route-id="@m.Id" class="btn btn-primary"> @SharedLocalizer["Edit"]</a>  </td>
+                                        <td> <a asp-action="Delete" asp-controller="Employee" asp-route-id="@m.Id" class="btn btn-danger"> @SharedLocalizer["Delete"]</a>  </td>
+                                        <td> <a asp-action="Details" asp-controller="Employee" asp-route-id="@m.Id" class="btn btn-info"> @SharedLocalizer["Details"]</a>  </td>
 
                                     </tr>
 

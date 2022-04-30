@@ -1,8 +1,8 @@
-﻿using AspGraduateProjAdminPan.Models;
-using AspGraduateProjAdminPan.BL.Interface;
+﻿using AspGraduateProjAdminPan.BL.Interface;
+using AspGraduateProjAdminPan.Models;
+using AutoMapper;
 using System.Linq;
 using WebApplication7.DAL.Database;
-using AutoMapper;
 
 namespace AspGraduateProjAdminPan.BL.Repository
 {
@@ -18,7 +18,7 @@ namespace AspGraduateProjAdminPan.BL.Repository
             this.mapper = mapper;
         }
 
- 
+
 
 
         public IQueryable<CountryVM> Get()
@@ -37,4 +37,5 @@ namespace AspGraduateProjAdminPan.BL.Repository
             return mapper.Map<CountryVM>(data);
 
         }
-    } }
+    }
+}

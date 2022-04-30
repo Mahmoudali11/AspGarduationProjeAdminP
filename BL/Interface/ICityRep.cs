@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using AspGraduateProjAdminPan.Models;
+﻿using AspGraduateProjAdminPan.Models;
 using System.Linq;
 
 namespace AspGraduateProjAdminPan.BL.Interface

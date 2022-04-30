@@ -126,6 +126,9 @@
   <data name="Arabic" xml:space="preserve">
     <value>عربى</value>
   </data>
+  <data name="de" xml:space="preserve">
+    <value>تفاصيل</value>
+  </data>
   <data name="Delete" xml:space="preserve">
     <value>حذف</value>
   </data>
@@ -134,6 +137,12 @@
   </data>
   <data name="DepartmentName" xml:space="preserve">
     <value>أسم القسم</value>
+  </data>
+  <data name="Det" xml:space="preserve">
+    <value>تفاصيل</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>تفاصيل</value>
   </data>
   <data name="DistrictId" xml:space="preserve">
     <value>رقم الحى</value>

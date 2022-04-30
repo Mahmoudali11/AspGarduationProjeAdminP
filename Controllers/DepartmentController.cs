@@ -1,13 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebApplication7.BL.Repository;
-using WebApplication7.DAL.Database;
-using WebApplication7.Models;
- using System.Diagnostics;
+using System.Diagnostics;
 using WebApplication7.BL.Interface;
+using WebApplication7.Models;
 
 namespace WebApplication7.Controllers
 {

@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using AspGraduateProjAdminPan.DAL.Entities;
 using System;
-using AspGraduateProjAdminPan.DAL.Entities;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace WebApplication7.DAL.Entities
 {
     [Table("Emp")]
@@ -16,13 +16,13 @@ namespace WebApplication7.DAL.Entities
         [MaxLength(300)]
         public string Address { get; set; }
         public int DepId { get; set; }
-       
-        
+
+
         [ForeignKey("DepId")]
-        public Department Department  { get; set; }
-        
+        public Department Department { get; set; }
+
         public double Salary { get; set; }
-        public  DateTime HireDate { get; set; }
+        public DateTime HireDate { get; set; }
         public bool IsActive { get; set; }
         [MaxLength(50)]
         public string Email { get; set; }

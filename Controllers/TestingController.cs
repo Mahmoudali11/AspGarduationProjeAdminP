@@ -13,11 +13,11 @@ namespace AspGraduateProjAdminPan.Controllers
         //dose not support POST method
         //ajax call////////////////
 
-         [HttpPost]
+        [HttpPost]
         public JsonResult getUserData(int x, int y)
         {
-             
-            return Json(x*y);
+
+            return Json(x * y);
         }
     }
 }

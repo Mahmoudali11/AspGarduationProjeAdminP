@@ -1,24 +1,20 @@
+using AspGraduateProjAdminPan.BL.Interface;
+using AspGraduateProjAdminPan.BL.Mapping;
+using AspGraduateProjAdminPan.BL.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json.Serialization;
+using System.Collections.Generic;
+using System.Globalization;
 using WebApplication7.BL.Interface;
 using WebApplication7.BL.Repository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using WebApplication7.DAL.Database;
-using Microsoft.EntityFrameworkCore;
-using AspGraduateProjAdminPan.BL.Mapping;
-using Newtonsoft.Json.Serialization;
-using AspGraduateProjAdminPan.BL.Interface;
-using AspGraduateProjAdminPan.BL.Repository;
-using Microsoft.AspNetCore.Mvc.Razor;
-using AspGraduateProjAdminPan.Resource;
-using System.Globalization;
-using Microsoft.AspNetCore.Localization;
 
 namespace WebApplication7
 {
@@ -33,20 +29,21 @@ namespace WebApplication7
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {   
+        {
             /////////=>register controllers and views.
             services.AddControllersWithViews().
                 //for localization/globalization.
                 AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
                 //for newtownsoft to help in Json formating.
-                .AddDataAnnotationsLocalization().AddNewtonsoftJson(opt => {
-                opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
-            });
-            
+                .AddDataAnnotationsLocalization().AddNewtonsoftJson(opt =>
+                {
+                    opt.SerializerSettings.ContractResolver = new DefaultContractResolver();
+                });
+
             //here apply singletone"or unit of work" using DI
             //create instance for each user... and this is most used
             //=>regester my services
-            services.AddScoped<IDepartmentRep,DepartmentRep>();
+            services.AddScoped<IDepartmentRep, DepartmentRep>();
             services.AddScoped<IEmployeeRep, EmployeeRep>();
             services.AddScoped<ICountryRep, CountryRep>();
 
@@ -68,13 +65,13 @@ namespace WebApplication7
             }
             /// 
             /// register Mapper 
-               services.AddAutoMapper(regm);
+            services.AddAutoMapper(regm);
             //////register connection string..
-            
-            services.AddDbContextPool<DbContainer>(optio=>optio.UseSqlServer(Configuration.GetConnectionString("SiteDb")));
-            
+
+            services.AddDbContextPool<DbContainer>(optio => optio.UseSqlServer(Configuration.GetConnectionString("SiteDb")));
+
             //////
-           ////
+            ////
 
         }
 
@@ -129,7 +126,7 @@ namespace WebApplication7
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-      
+
 
 
         }

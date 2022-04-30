@@ -1,9 +1,9 @@
 ﻿
-using AspGraduateProjAdminPan.Models;
 using AspGraduateProjAdminPan.BL.Interface;
+using AspGraduateProjAdminPan.Models;
+using AutoMapper;
 using System.Linq;
 using WebApplication7.DAL.Database;
-using AutoMapper;
 
 namespace AspGraduateProjAdminPan.BL.Repository
 {

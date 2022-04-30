@@ -42,6 +42,8 @@
     <select asp-for="DepId" asp-items="@(SelectList)ViewBag.Deps">
         <option>Choose Department</option>
     </select>
+        <span class="text-danger" asp-validation-for="DepId"></span>
+
      <br /><br />
 
 
@@ -49,6 +51,7 @@
     <select id="CountryId" asp-items="@(SelectList)ViewBag.country">
         <option>Choose Country</option>
     </select>
+
     <br /><br />
 
 
@@ -60,7 +63,7 @@
 
 
     <label asp-for="DistrictId">District</label>
-    <select asp-for="DistrictId">
+    <select id="DistrictId" asp-for="DistrictId">
         <option>Choose District</option>
     </select>
     <span class="text-danger" asp-validation-for="DistrictId"></span>
