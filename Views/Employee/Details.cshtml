@@ -1,12 +1,9 @@
-﻿
-
- 
-@model WebApplication7.Models.EmployeeVM
-@{ 
+﻿@model WebApplication7.Models.EmployeeVM
+@{
 
     ViewBag.Title = "Deatils";
 }
-    <link href="~/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
+<link href="~/plugins/bootstrap-select/css/bootstrap-select.min.css" rel="stylesheet" />
 
 
 <form asp-action="Index" method="get" asp-controller="Employee" class="form-group">
@@ -18,7 +15,7 @@
     <br /><br />
 
     <label asp-for="Salary">Employee Salary</label>
-    <input type="text"disabled asp-for="Salary" class="form-control" />
+    <input type="text" disabled asp-for="Salary" class="form-control" />
     <span class="text-danger" asp-validation-for="Salary"></span>
     <br /><br />
 
@@ -38,21 +35,21 @@
 
 
     <label>Email Of Employee</label>
-    <input type="email"disabled class="form-control" asp-for="Email" />
+    <input type="email" disabled class="form-control" asp-for="Email" />
     <span class="text-danger" asp-validation-for="Email"></span>
 
     <br />
     <br />
     <label asp-for="DepId">Department</label>
 
-    <select asp-for="DepId" disabled  asp-items="@(SelectList)ViewBag.Deps">
+    <select asp-for="DepId" disabled asp-items="@(SelectList)ViewBag.Deps">
         <option>Choose Department..</option>
     </select>
 
 
     <br /><br />
     <label>Country</label>
-    <select id="CountryId"disabled asp-items="@(SelectList)ViewBag.country">
+    <select id="CountryId" disabled asp-items="@(SelectList)ViewBag.country">
         <option>Choose Country</option>
     </select>
     <br /><br />
@@ -66,14 +63,18 @@
 
 
     <label id="DistrictId">District</label>
-    <select disabled    asp-items="@(SelectList)ViewBag.district">
+    <select disabled asp-items="@(SelectList)ViewBag.district">
         <option>Choose District</option>
     </select>
     <span class="text-danger" asp-validation-for="DistrictId"></span>
     <br /><br />
+    <br /><br />
+
+    <img src="~/Files/Photos/@Model.PhotoName" style="width:100px; height:100px" />
+    <br />
+    <a href="~/Files/Docs/@Model.CvName">CV Download </a>
 
 
-     
 
     <br />
     <center>
@@ -81,4 +82,3 @@
     </center>
 
 </form>
- 

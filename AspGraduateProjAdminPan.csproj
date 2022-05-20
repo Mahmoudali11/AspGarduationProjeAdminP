@@ -17,4 +17,11 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Areas\Bill\Controllers\" />
+    <Folder Include="Areas\Bill\Views\" />
+    <Folder Include="wwwroot\Files\Docs\" />
+    <Folder Include="wwwroot\Files\Photos\" />
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
 namespace WebApplication7.Models
 {
@@ -25,6 +26,10 @@ namespace WebApplication7.Models
 
         public int DistrictId { get; set; }
 
+        public string PhotoName { get; set; }
+        public string CvName { get; set; }
+        public IFormFile  PhotoDetails { get; set; }
+        public IFormFile CvDetails { get; set; }
 
 
     }

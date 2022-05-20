@@ -23,6 +23,8 @@ namespace WebApplication7.DAL.Entities
 
         public double Salary { get; set; }
         public DateTime HireDate { get; set; }
+        public string PhotoName { get; set; }
+        public string CvName { get; set; }
         public bool IsActive { get; set; }
         [MaxLength(50)]
         public string Email { get; set; }
@@ -30,5 +32,6 @@ namespace WebApplication7.DAL.Entities
         public int DistrictId { get; set; }
         [ForeignKey("DistrictId")]
         public District District { get; set; }
+
     }
 }

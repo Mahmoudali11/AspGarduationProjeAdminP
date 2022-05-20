@@ -1,4 +1,6 @@
-﻿using AutoMapper;
+﻿using AspGraduateProjAdminPan.BL.Helper;
+using AutoMapper;
+using System.IO;
 using System.Linq;
 using WebApplication7.BL.Interface;
 using WebApplication7.DAL.Database;
@@ -26,7 +28,11 @@ namespace WebApplication7.BL.Repository
         {
             var data = mapper.Map<Employee>(emp);
 
-
+            var cvName = UploadFileHelper.SaveFile(emp.CvDetails, "Docs");
+            var photoName = UploadFileHelper.SaveFile(emp.PhotoDetails, "Photos");
+            //override data cvname and data photoname
+            data.CvName = cvName;
+            data.PhotoName = photoName;
             dbContainer.Add(data);
             dbContainer.SaveChanges();
         }
@@ -35,6 +41,8 @@ namespace WebApplication7.BL.Repository
         {
 
             var emp = dbContainer.Employee.Find(id);
+            UploadFileHelper.RemoveFile(emp.PhotoName, "Photos");
+            UploadFileHelper.RemoveFile(emp.CvName, "Docs");
 
             dbContainer.Employee.Remove(emp);
 
@@ -65,14 +73,14 @@ namespace WebApplication7.BL.Repository
         {
 
 
-            return dbContainer.Employee.Select(a => new EmployeeVM() { Name = a.Name, Address = a.Address, DistrictId = a.District.Id, Email = a.Email, Salary = a.Salary, DepId = a.DepId, IsActive = a.IsActive, Id = a.Id, HireDate = a.HireDate, DistrictName = a.District.Name });
+            return dbContainer.Employee.Select(a => new EmployeeVM() { Name = a.Name, Address = a.Address, DistrictId = a.District.Id, Email = a.Email, Salary = a.Salary, DepId = a.DepId, IsActive = a.IsActive, Id = a.Id, HireDate = a.HireDate, DistrictName = a.District.Name, PhotoName = a.PhotoName, CvName = a.CvName, });
         }
 
         public EmployeeVM GetById(int id)
         {
 
 
-            var data = dbContainer.Employee.Where(a => a.Id == id).Select(a => new EmployeeVM() { Name = a.Name, Address = a.Address, DistrictId = a.District.Id, Email = a.Email, Salary = a.Salary, DepId = a.DepId, IsActive = a.IsActive, Id = a.Id, HireDate = a.HireDate, DistrictName = a.District.Name }).FirstOrDefault();
+            var data = dbContainer.Employee.Where(a => a.Id == id).Select(a => new EmployeeVM() { Name = a.Name, Address = a.Address, DistrictId = a.District.Id, Email = a.Email, Salary = a.Salary, DepId = a.DepId, IsActive = a.IsActive, Id = a.Id, HireDate = a.HireDate, DistrictName = a.District.Name, PhotoName = a.PhotoName, CvName = a.CvName }).FirstOrDefault();
             return mapper.Map<EmployeeVM>(data);
         }
     }

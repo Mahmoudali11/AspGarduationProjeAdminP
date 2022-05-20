@@ -116,7 +116,14 @@ namespace WebApplication7
 
             app.UseAuthorization();
 
-
+            ///if there areas in our project
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                  name: "areas",
+                  pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
+            });
 
 
             app.UseEndpoints(endpoints =>
@@ -125,8 +132,7 @@ namespace WebApplication7
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
-
+      
 
 
         }

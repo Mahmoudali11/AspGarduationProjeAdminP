@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Diagnostics;
+using System.IO;
 using WebApplication7.BL.Interface;
 using WebApplication7.Models;
 
@@ -100,14 +101,13 @@ namespace AspGraduateProjAdminPan.Controllers
 
 
 
-
-
-
             try
             {
                 if (ModelState.IsValid)
                 {
 
+
+               
 
                     employee.Add(emp);
                     return RedirectToAction("Index");

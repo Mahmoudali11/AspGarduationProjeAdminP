@@ -1,0 +1,32 @@
+﻿@using AspGraduateProjAdminPan.Resource.Employee;
+@using Microsoft.Extensions.Localization;
+@inject IStringLocalizer<ShRes> SharedLocalizer;
+
+@{
+    ViewBag.Title = SharedLocalizer["Employee"];
+    var Culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
+    Layout = "~/Views/Layout/MainLayout.cshtml";
+
+}
+
+
+@*check culture type*@
+
+
+@*
+
+@if (Culture == "ar-EG")
+{
+    <h3 id="Myh">
+        <a asp-controller="Employee" asp-action="Index" asp-route-culture="en-US">@SharedLocalizer["English"]</a>
+    </h3>
+}
+
+@if (Culture == "en-US")
+{
+    <h3 id="Myh">
+        <a asp-controller="Employee" asp-action="Index" asp-route-culture="ar-EG">@SharedLocalizer["Arabic"]</a>
+    </h3>
+}
+*@
+<h1> Welcome To Branch Def</h1>

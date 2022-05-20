@@ -105,6 +105,9 @@ namespace AspGraduateProjAdminPan.Migrations
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
+                    b.Property<string>("CvName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("DepId")
                         .HasColumnType("int");
 
@@ -124,6 +127,9 @@ namespace AspGraduateProjAdminPan.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
+
+                    b.Property<string>("PhotoName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Salary")
                         .HasColumnType("float");
@@ -162,7 +168,7 @@ namespace AspGraduateProjAdminPan.Migrations
             modelBuilder.Entity("WebApplication7.DAL.Entities.Employee", b =>
                 {
                     b.HasOne("WebApplication7.DAL.Entities.Department", "Department")
-                        .WithMany("Employees")
+                        .WithMany()
                         .HasForeignKey("DepId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -189,16 +195,6 @@ namespace AspGraduateProjAdminPan.Migrations
                 });
 
             modelBuilder.Entity("AspGraduateProjAdminPan.DAL.Entities.District", b =>
-                {
-                    b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("WebApplication7.DAL.Entities.Department", b =>
-                {
-                    b.Navigation("Employees");
-                });
-
-            modelBuilder.Entity("WebApplication7.DAL.Entities.Department", b =>
                 {
                     b.Navigation("Employees");
                 });
