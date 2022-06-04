@@ -1,11 +1,16 @@
 ﻿using AspGraduateProjAdminPan.DAL.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using WebApplication7.DAL.Entities;
 
 namespace WebApplication7.DAL.Database
 {
-    public class DbContainer : DbContext
+    public class DbContainer : IdentityDbContext
     {
+        /// <summary>
+        /// here i ll replace DBContect with IdentiyDbcontext to create uerr table("Identification")
+        /// and create tables of security in database like users table...
+        /// </summary>
         public DbSet<Department> Department { get; set; }
         public DbSet<Employee> Employee { get; set; }
         public DbSet<City> City { get; set; }

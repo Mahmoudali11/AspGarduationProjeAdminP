@@ -1,4 +1,5 @@
 ﻿using AspGraduateProjAdminPan.BL.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -9,6 +10,7 @@ using WebApplication7.Models;
 
 namespace AspGraduateProjAdminPan.Controllers
 {
+    [Authorize]
     public class EmployeeController : Controller
 
     {

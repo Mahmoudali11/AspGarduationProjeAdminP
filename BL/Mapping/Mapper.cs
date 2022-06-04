@@ -22,14 +22,6 @@ namespace AspGraduateProjAdminPan.BL.Mapping
             CreateMap<DistrictVM, District>();
 
 
-
-
-
-
-
-
-
-
         }
     }
 }

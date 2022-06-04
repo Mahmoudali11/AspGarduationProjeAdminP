@@ -2,6 +2,8 @@
 using System.Net;
 using System.Net.Mail;
 using System;
+using AspGraduateProjAdminPan.BL.Helper;
+
 namespace AspGraduateProjAdminPan.Controllers
 {
     public class MailController : Controller
@@ -23,10 +25,7 @@ namespace AspGraduateProjAdminPan.Controllers
  
             try
             {
-
-                SmtpClient smtpClient = new SmtpClient { Host = "smtp.gmail.com", Port = 575, EnableSsl = true };
-                smtpClient.Credentials = new NetworkCredential("as8338873@gmail.com", "A@123321A@");
-                smtpClient.Send("as8338873@gmail.com", "mahmoudsaleam11@gmail.com", Title, Message);
+                MailHelper.Sendmail(Title, Message);
                 TempData["mes"] = "mail sent successfully";
                 return RedirectToAction("Index", "Employee");
             }

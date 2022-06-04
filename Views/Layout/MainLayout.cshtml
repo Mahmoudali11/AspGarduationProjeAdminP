@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
+@{
     var Culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name;
 }
 <!DOCTYPE html>
@@ -301,7 +303,15 @@
                 </div>
                 <div class="info-container">
                     <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                    <div class="email">john.doe@example.com</div>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <div class="email">@User.Identity.Name</div>
+                    }
+                    else
+                    {
+                         <div class="email">mm@gmail.com</div>
+ 
+                    }
                     <div class="btn-group user-helper-dropdown">
                         <i class="material-icons" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
                         <ul class="dropdown-menu pull-right">
@@ -311,7 +321,8 @@
                             <li><a href="javascript:void(0);"><i class="material-icons">shopping_cart</i>Sales</a></li>
                             <li><a href="javascript:void(0);"><i class="material-icons">favorite</i>Likes</a></li>
                             <li role="seperator" class="divider"></li>
-                            <li><a href="javascript:void(0);"><i class="material-icons">input</i>Sign Out</a></li>
+                            @*you may use form instead*@
+                            <li><a asp-action="LogOut" asp-controller="Account"><i class="material-icons">input</i>Sign Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -403,6 +414,23 @@
                             </li>  <li>
                                 <a  asp-controller="Mail" asp-action="MailBox">MailBox</a>
                             </li>
+                            
+
+                        </ul>
+                    </li>
+                     @*Role*@
+                     <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">widgets</i>
+                            <span>Roles</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a  asp-controller="Admin" asp-action="CreateRole">Create Role</a>
+                            </li>
+                            <li>
+                                <a  asp-controller="Admin" asp-action="Index">Roles</a>
+                            </li>  
                             
 
                         </ul>

@@ -3,6 +3,7 @@ using AspGraduateProjAdminPan.BL.Mapping;
 using AspGraduateProjAdminPan.BL.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.EntityFrameworkCore;
@@ -50,15 +51,36 @@ namespace WebApplication7
             services.AddScoped<ICityRep, CityRep>();
 
             services.AddScoped<IDistrictRep, DistrictRep>();
+            //inject user and user role then register them in DBContainer                              
 
-
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DbContainer>().
+             //to allow token generation
+             AddTokenProvider<DataProtectorTokenProvider<IdentityUser>>(TokenOptions.DefaultProvider);
+            services.Configure<IdentityOptions>(options =>
+           {
+               // Password settings.
+               options.Password.RequireDigit = true;
+               options.Password.RequireLowercase = false;
+               options.Password.RequireNonAlphanumeric = false;
+               options.Password.RequireUppercase = false;
+               options.Password.RequiredLength = 4;
+               options.Password.RequiredUniqueChars = 0;
+               //// Lockout settings.
+               //options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+               //options.Lockout.MaxFailedAccessAttempts = 5;
+               //options.Lockout.AllowedForNewUsers = true;
+               //// User settings.
+               //options.User.AllowedUserNameCharacters =
+               //"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+               //options.User.RequireUniqueEmail = false;
+           });
             //shared instance for all users
             //  services.AddSingleton<DepartmentRep>();
             /////////////////////////////
             //instanced for each request
             //services.AddTransient<DepartmentRep>();
-            //////////////////////////////////
-            ///
+            ////////////////////////////////////
+            ///Acion///
             void regm(AutoMapper.IMapperConfigurationExpression n)
             {
                 n.AddProfile(new Mapper());
@@ -113,7 +135,7 @@ namespace WebApplication7
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseAuthentication();
             app.UseAuthorization();
 
             ///if there areas in our project
@@ -130,9 +152,9 @@ namespace WebApplication7
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Account}/{action=Login}/{id?}");
             });
-      
+
 
 
         }
